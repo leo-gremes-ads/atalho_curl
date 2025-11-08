@@ -1,0 +1,23 @@
+{
+	"itens": [
+		{
+			"produtoId": 22,
+			"quantidade": 5
+		},
+		{
+			"produtoId": 17,
+			"quantidade": 3,
+			"observacao": "Capricha no recheio"
+		},
+		{
+			"produtoId": 5,
+			"quantidade": 1,
+			"observacao": "Sem gelo"
+		},
+		{
+			"produtoId": 5,
+			"quantidade": 1,
+			"observacao": "Gelado"
+		}
+	]
+}
