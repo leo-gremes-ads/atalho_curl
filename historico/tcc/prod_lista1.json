@@ -1,0 +1,44 @@
+[
+  {
+    "nome": "Pizza de Calabreza",
+    "categoria": "Pizzas",
+    "descricao": "Calabreza e cebola",
+    "precoProduto": 45.9
+  },
+  {
+    "nome": "Pizza de 4 Queijos",
+    "categoria": "Pizzas",
+    "descricao": "Mussarela, Parmesao, Gorgonzola e Prato",
+    "precoProduto": 51.9
+  },
+  {
+    "nome": "Pizza de Frango com Catupiry",
+    "categoria": "Pizzas",
+    "descricao": "Frango desfiado e catupiry",
+    "precoProduto": 47.5
+  },
+  {
+    "nome": "X-Burguer",
+    "categoria": "Lanches",
+    "descricao": "Hamburguer e queijo",
+    "precoProduto": 18
+  },
+  {
+    "nome": "X-Bacon",
+    "categoria": "Lanches",
+    "descricao": "Hamburguer, queijo e bacon",
+    "precoProduto": 22.3
+  },
+  {
+    "nome": "Coca-cola Lata",
+    "categoria": "Refrigerantes",
+    "descricao": "Coca-Cola lata 350ml",
+    "precoProduto": 6.5
+  },
+  {
+    "nome": "Coca-Cola 600ml",
+    "categoria": "Refrigerante",
+    "descricao": "Coca-Cola 600ml",
+    "precoProduto": 10.3
+  }
+]

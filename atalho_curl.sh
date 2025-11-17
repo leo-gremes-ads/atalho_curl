@@ -1,53 +1,66 @@
 #!bin/bash
 
-function GET()
+function get()
 {
     declare get_uri
 
-    if [ -z "$URI" ]; then
-        get_uri='localhost:8080'
+    if [ -z "$URL" ]; then
+        get_url='localhost:8080'
     else
-        get_uri="$URI"
+        get_url="$URL"
     fi
-    echo "curl -X GET ${get_uri}$1"
-    curl --silent -X GET "${get_uri}$1" | jq
+    echo "curl -X GET ${get_url}$1"
+    curl --silent -X GET "${get_url}$1" | jq
 }
 
-function PUT()
+function put()
 {
     declare put_uri
 
-    if [ -z "$URI" ]; then
-        put_uri='localhost:8080'
+    if [ -z "$URL" ]; then
+        put_url='localhost:8080'
     else
-        put_uri="$URI"
+        put_url="$URL"
     fi
-    echo "curl --silent -X PUT -H \"Content-Type: application/json\" -d @$1 ${put_uri}$2"
-    eval "curl --silent -X PUT -H \"Content-Type: application/json\" -d @$1 ${put_uri}$2" | jq
+    echo "curl --silent -X PUT -H \"Content-Type: application/json\" -d @$1 ${put_url}$2"
+    eval "curl --silent -X PUT -H \"Content-Type: application/json\" -d @$1 ${put_url}$2" | jq
 }
 
-function POST()
+function post()
 {
     declare put_uri
 
-    if [ -z "$URI" ]; then
-        put_uri='localhost:8080'
+    if [ -z "$URL" ]; then
+        put_url='localhost:8080'
     else
-        put_uri="$URI"
+        put_url="$URL"
     fi
-    echo "curl --silent -X POST -H \"Content-Type: application/json\" -d @$1 ${put_uri}$2"
-    eval "curl --silent -X POST -H \"Content-Type: application/json\" -d @$1 ${put_uri}$2" | jq
+    echo "curl --silent -X POST -H \"Content-Type: application/json\" -d @$1 ${put_url}$2"
+    eval "curl --silent -X POST -H \"Content-Type: application/json\" -d @$1 ${put_url}$2" | jq
 }
 
-function DELETE()
+function delete()
 {
 	declare del_uri
 
-	if [ -z "$URI" ]; then
-		del_uri='localhost:8080'
+	if [ -z "$URL" ]; then
+		del_url='localhost:8080'
 	else
-		del_uri="$URI"
+		del_url="$URL"
 	fi
-	echo "curl --silent -X DELETE ${del_uri}$1"
-	eval "curl --silent -X DELETE ${del_uri}$1" | jq
+	echo "curl --silent -X DELETE ${del_url}$1"
+	eval "curl --silent -X DELETE ${del_url}$1" | jq
+}
+
+function patch()
+{
+    declare patch_uri
+
+    if [ -z "$URL" ]; then
+        patch_url='localhost:8080'
+    else
+        patch_url="$URL"
+    fi
+    echo "curl --silent -X PATCH -H \"Content-Type: application/json\" -d @$1 ${patch_url}$2"
+    eval "curl --silent -X PATCH -H \"Content-Type: application/json\" -d @$1 ${patch_url}$2" | jq
 }

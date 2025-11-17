@@ -1,0 +1,32 @@
+[
+  {
+    "nome": "Pizza de Mussarela",
+    "categoria": "Pizzas",
+    "descricao": "Queijo mussarela e oregano",
+    "precoProduto": 33.9
+  },
+  {
+    "nome": "X-Salada",
+    "categoria": "Lanches",
+    "descricao": "Hamburguer, queijo, alface e tomate",
+    "precoProduto": 18.75
+  },
+  {
+    "nome": "Coxinha",
+    "categoria": "Salgados",
+    "descricao": "Coxinha tradicional de frango",
+    "precoProduto": 5.7
+  },
+  {
+    "nome": "Coxinha Frango com Catupiry",
+    "categoria": "Salgados",
+    "descricao": "Coxinha de frango com catupiry",
+    "precoProduto": 6.2
+  },
+  {
+    "nome": "Coxinha Vegana",
+    "categoria": "Salgados",
+    "descricao": "Coxinha Vegana de Jaca",
+    "precoProduto": 7
+  }
+]
