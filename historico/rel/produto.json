@@ -1,4 +1,35 @@
 {
-  "nome": "Fanta Uva 2L",
-  "precoProduto": 15
+  "nome": "Lanche de Salpicao",
+  "categoria": "Lanches",
+  "preco": 6.9,
+  "ingredientes": [
+    {
+      "ingredienteId": 1,
+      "qtd": 150
+    },
+    {
+      "ingredienteId": 2,
+      "qtd": 0.25
+    },
+    {
+      "ingredienteId": 3,
+      "qtd": 50
+    },
+    {
+      "ingredienteId": 4,
+      "qtd": 50
+    },
+    {
+      "ingredienteId": 5,
+      "qtd": 10
+    },
+    {
+      "ingredienteId": 6,
+      "qtd": 70
+    },
+    {
+      "ingredienteId": 7,
+      "qtd": 2
+    }
+  ]
 }

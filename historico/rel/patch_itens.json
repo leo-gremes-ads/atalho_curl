@@ -1,0 +1,12 @@
+{
+  "itens": [
+    {
+      "produtoId": 3,
+      "qtd": 8
+    },
+    {
+      "produtoId": 5,
+      "qtd": 1500
+    }
+  ]
+}

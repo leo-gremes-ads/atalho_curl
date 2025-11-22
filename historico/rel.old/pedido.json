@@ -1,0 +1,17 @@
+{
+  "cliente": "Hebe Camargo",
+  "itens": [
+    {
+      "produtoId": 17,
+      "qtd": 1
+    },
+    {
+      "produtoId": 5,
+      "qtd": 10
+    },
+    {
+      "produtoId": 7,
+      "qtd": 5
+    }
+  ]
+}
