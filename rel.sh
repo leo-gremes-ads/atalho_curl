@@ -1,20 +1,5 @@
 #!/bin/bash
 
-function rofi_input()
-{
-    declare resp
-    resp=$(echo "" | rofi -dmenu -p "$1" -l 0)
-    echo "$resp"
-}
-
-function input_prompt()
-{
-    local resp
-    printf "$1" >&2
-    read resp
-    echo "$resp"
-}
-
 function pedido()
 {
     declare mesa
@@ -25,24 +10,22 @@ function pedido()
     declare produto
     declare lista=()
 
-    produtos=`curl --silent -X GET localhost:8080/produto | jq -r '.[] | "\(.id)\t\(.nome)"'`
+    produtos=`curl --silent -X GET localhost:8080/produto | jq -r '.[] | "\(.id)\t\(.nome)\t\(.categoria)"'`
 
     printf "\nDigite o numero da mesa:\n> "
     read mesa
-    #mesa=`rofi_input "Numero da mesa"`
-    #mesa=$(input_prompt "Número da mesa: ")
     while true; do
-        #produto=`echo "$produtos" | rofi -dmenu -i -p "Escolha o produto"`
-        produto=$(echo "$produtos" | cut -f2 | fzf --prompt="Selecione o produto: ")
+        produto=$(echo "$produtos" | cut -f2-3 | column -t -s $'\t' | fzf --prompt="Selecione o produto: ")
         if [ $? -ne 0 ]; then
             break
         fi
-        id=`printf "%s" "$produtos" | grep "$produto$" | cut -f 1`
-        #qtd=$(rofi_input "Qtd de $(printf "%s" "$produto" | cut -f 2)")
-        printf "\nDigite a quantidadde de $(printf "%s" "$produto" | cut -f2)\n> "
+        produto=$(printf "$produto" | sed 's/  \+/\t/g' | cut -f1)
+        id=$(printf "%s" "$produtos" | grep -P "$produto\t" | cut -f1)
+        printf "\nDigite a quantidadde de $(printf "%s" "$produto")\n> "
         read qtd
         lista+=( "$(jo produtoId="$id" qtd="$qtd")" )
     done
+    printf "\n========== post.json ===========\n"
     jo numeroMesa="$mesa" itens=$(jo -a "${lista[@]}") | jq > post.json
     cat post.json   
 }
@@ -56,20 +39,25 @@ function produto()
     declare ing
     declare id
     declare qtd
-    declare ingredientes=$(curl --silent -X GET localhost:8080/ingrediente | jq -r '.[] | "\(.id)\t\(.nome)"')
+    declare ingredientes=$(curl --silent -X GET localhost:8080/ingrediente | jq -r '.[] | "\(.id)\t\(.nome)\t\(.unDeMedida)"')
 
-    nome=$(rofi_input "Nome do produto")
-    categoria=$(rofi_input "Categoria do produto")
-    preco=$(rofi_input "Preço do produto")
+    printf "\nNome do produto\n> "
+    read nome
+    printf "\nCategoria do produto\n> "
+    read categoria
+    printf "\nPreço do produto\n> "
+    read preco
     while true; do
-        ing=$(printf "%s" "$ingredientes" | cut -f2 | rofi -dmenu -i -p "Escolha o ingrediente")
+        ing=$(printf "%s" "$ingredientes" | cut -f2 | fzf --prompt="Selecione o ingrediente: ")
         if [ $? -ne 0 ]; then
             break
         fi
-        id=$(printf "%s" "$ingredientes" | grep "$ing$" | cut -f1)
-        qtd=$(rofi_input "Quantidade de $(printf "%s" "$ing" | cut -f2)")
+        id=$(printf "$ingredientes" | grep -P "$ing\t" | cut -f1)
+        printf "\nQuantidade de %s (%s)\n> " "$ing" "$(printf "$ingredientes" | grep -P "$ing\t" | cut -f3)"
+        read qtd
         lista+=( "$(jo ingredienteId="$id" qtd="$qtd")" )
     done
+    printf "\n========== post.json ===========\n"
     if [[ "${#lista[@]}" -eq 0 ]]; then
         jo nome="$nome" categoria="$categoria" preco="$preco" ingredientes=$(jo -a < /dev/null) | jq > post.json
     else
@@ -84,9 +72,13 @@ function ingrediente()
     declare un
     declare fornecedor
 
-    nome=$(rofi_input "Nome do ingrediente")
-    un=$(rofi_input "Unidade de Medida")
-    fornecedor=$(rofi_input "Nome do fornecedor")
+    printf "\nNome do ingrediente\n> "
+    read nome
+    printf "\nUnidade de medida\n> "
+    read un
+    printf "\nNome do fornecedor\n> "
+    read fornecedor
+    printf "\n========== post.json ===========\n"
     jo nome="$nome" unDeMedida="$un" fornecedor="$fornecedor" | jq > post.json
     cat post.json
 }
